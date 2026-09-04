@@ -32,47 +32,101 @@ import {
   Zap,
 } from 'lucide-react';
 
+
+
 const phoneNumber = '6283191560934';
 const emailAddress = 'abdzr2307@gmail.com';
 const githubUrl = 'https://github.com/';
 
-const technicalSkills = [
-  { name: 'Troubleshooting VMware', logo: null, fallback: ServerCog },
-  { name: 'Laravel', logo: 'laravel' },
-  { name: 'CodeIgniter', logo: null, fallback: Code2 },
-  { name: 'TypeScript', logo: 'ts' },
-  { name: 'Node.js', logo: 'nodejs' },
-  { name: 'Vue.js', logo: 'vue' },
-  { name: 'React.js', logo: 'react' },
-  { name: 'React Native', logo: 'react' },
-  { name: 'Bootstrap CSS', logo: 'bootstrap' },
-  { name: 'Tailwind CSS', logo: 'tailwind' },
-  { name: 'PHP', logo: 'php' },
-  { name: 'HTML', logo: 'html' },
-  { name: 'CSS', logo: 'css' },
-  { name: 'JavaScript', logo: 'js' },
-  { name: 'Java', logo: 'java' },
-  { name: 'MySQL', logo: 'mysql' },
-  { name: 'PostgreSQL', logo: 'postgres' },
-  { name: 'RESTful API', logo: null, fallback: Globe2 },
-  { name: 'Git', logo: 'git' },
-  { name: 'Express.js', logo: 'express' },
-  { name: 'SQLite', logo: 'sqlite' },
-  { name: 'Figma', logo: 'figma' },
-  { name: 'Firebase', logo: 'firebase' },
-  { name: 'Supabase', logo: 'supabase' },
-  { name: 'Golang', logo: 'go' },
-  { name: 'AI Agent (n8n)', logo: null, fallback: Workflow },
-  { name: 'GitHub', logo: 'github' },
-  { name: 'Vercel', logo: 'vercel' },
-  { name: 'Cloudflare', logo: 'cloudflare' },
-  { name: 'Render', logo: null, fallback: Cloud },
-  { name: 'Upstash', logo: null, fallback: Database },
-  { name: 'Sentry', logo: null, fallback: AlertTriangle },
-  { name: 'UptimeRobot', logo: null, fallback: Activity },
-  { name: 'Anthropic Console', logo: null, fallback: Terminal },
-  { name: 'Hermes Agent', logo: null, fallback: Zap },
+export const skillCategories = [
+  {
+    category: 'Core Stack',
+    description: 'Teknologi utama yang paling sering digunakan dalam pengembangan web.',
+    skills: [
+      { name: 'HTML', logo: 'html' },
+      { name: 'CSS', logo: 'css' },
+      { name: 'JavaScript', logo: 'js' },
+      { name: 'TypeScript', logo: 'ts' },
+      { name: 'React.js', logo: 'react' },
+      { name: 'Tailwind CSS', logo: 'tailwind' },
+    ],
+  },
+  {
+    category: 'Backend & Frameworks',
+    description: 'Framework, runtime, dan bahasa pemrograman untuk sisi server.',
+    skills: [
+      { name: 'Node.js', logo: 'nodejs' },
+      { name: 'Express.js', logo: 'express' },
+      { name: 'Laravel', logo: 'laravel' },
+      { name: 'CodeIgniter', logo: null, fallback: Code2 },
+      { name: 'PHP', logo: 'php' },
+      { name: 'Golang', logo: 'go' },
+      { name: 'Java', logo: 'java' },
+    ],
+  },
+  {
+    category: 'Databases & Cloud Storage',
+    description: 'Manajemen basis data relational, BaaS, dan caching.',
+    skills: [
+      { name: 'PostgreSQL', logo: 'postgres' },
+      { name: 'MySQL', logo: 'mysql' },
+      { name: 'SQLite', logo: 'sqlite' },
+      { name: 'Supabase', logo: 'supabase' },
+      { name: 'Firebase', logo: 'firebase' },
+      { name: 'Upstash', logo: null, fallback: Database },
+    ],
+  },
+  {
+    category: 'Mobile & Other UI Frameworks',
+    description: 'Pengembangan aplikasi mobile dan styling alternatif.',
+    skills: [
+      { name: 'React Native', logo: 'react' },
+      { name: 'Vue.js', logo: 'vue' },
+      { name: 'Bootstrap CSS', logo: 'bootstrap' },
+      { name: 'Figma', logo: 'figma' },
+    ],
+  },
+  {
+    category: 'AI & Integrations',
+    description: 'Automasi workflow, AI agents, dan protokol API.',
+    skills: [
+      { name: 'RESTful API', logo: null, fallback: Globe2 },
+      { name: 'AI Agent (n8n)', logo: null, fallback: Workflow },
+      { name: 'Hermes Agent', logo: null, fallback: Zap },
+      { name: 'Anthropic Console', logo: null, fallback: Terminal },
+    ],
+  },
+  {
+    category: 'DevOps, Infrastructure & Monitoring',
+    description: 'Deployment cloud, version control, dan ketersediaan sistem.',
+    skills: [
+      { name: 'Git', logo: 'git' },
+      { name: 'GitHub', logo: 'github' },
+      { name: 'Vercel', logo: 'vercel' },
+      { name: 'Render', logo: null, fallback: Cloud },
+      { name: 'Cloudflare', logo: 'cloudflare' },
+      { name: 'VMware', logo: null, fallback: ServerCog },
+      { name: 'Sentry', logo: null, fallback: AlertTriangle },
+      { name: 'UptimeRobot', logo: null, fallback: Activity },
+    ],
+  },
 ];
+
+{skillCategories.map((group, idx) => (
+  <div key={idx} className="mb-8">
+    <h3 className="text-xl font-bold">{group.category}</h3>
+    <p className="text-sm text-gray-400 mb-4">{group.description}</p>
+    
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {group.skills.map((skill, sIdx) => (
+        <div key={sIdx} className="p-3 border rounded-lg flex items-center gap-2">
+          {/* Render Logo / Fallback Icon di sini */}
+          <span>{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+))}
 
 const softSkills = ['Good communication', 'Problem solving', 'Independent & collaborative', 'Quick to learn'];
 
