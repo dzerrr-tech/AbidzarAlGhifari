@@ -6,17 +6,12 @@ import {
   Activity,
   AlertTriangle,
   ArrowUpRight,
-  BriefcaseBusiness,
-  Check,
   ChevronDown,
   Cloud,
   Code2,
   Database,
-  Download,
-  ExternalLink,
   Github,
   Globe2,
-  GraduationCap,
   Headphones,
   Mail,
   MapPin,
@@ -32,8 +27,6 @@ import {
   Zap,
 } from 'lucide-react';
 
-
-
 const phoneNumber = '6283191560934';
 const emailAddress = 'abdzr2307@gmail.com';
 const githubUrl = 'https://github.com/';
@@ -41,7 +34,7 @@ const githubUrl = 'https://github.com/';
 export const skillCategories = [
   {
     category: 'Core Stack',
-    description: 'Teknologi utama yang paling sering digunakan dalam pengembangan web.',
+    description: 'Primary technologies and frameworks most frequently used in development.',
     skills: [
       { name: 'HTML', logo: 'html' },
       { name: 'CSS', logo: 'css' },
@@ -53,7 +46,7 @@ export const skillCategories = [
   },
   {
     category: 'Backend & Frameworks',
-    description: 'Framework, runtime, dan bahasa pemrograman untuk sisi server.',
+    description: 'Server-side runtimes, frameworks, and programming languages.',
     skills: [
       { name: 'Node.js', logo: 'nodejs' },
       { name: 'Express.js', logo: 'express' },
@@ -66,7 +59,7 @@ export const skillCategories = [
   },
   {
     category: 'Databases & Cloud Storage',
-    description: 'Manajemen basis data relational, BaaS, dan caching.',
+    description: 'Relational databases, backend-as-a-service platforms, and caching tools.',
     skills: [
       { name: 'PostgreSQL', logo: 'postgres' },
       { name: 'MySQL', logo: 'mysql' },
@@ -78,7 +71,7 @@ export const skillCategories = [
   },
   {
     category: 'Mobile & Other UI Frameworks',
-    description: 'Pengembangan aplikasi mobile dan styling alternatif.',
+    description: 'Mobile app development and alternative user interface toolkits.',
     skills: [
       { name: 'React Native', logo: 'react' },
       { name: 'Vue.js', logo: 'vue' },
@@ -88,7 +81,7 @@ export const skillCategories = [
   },
   {
     category: 'AI & Integrations',
-    description: 'Automasi workflow, AI agents, dan protokol API.',
+    description: 'Workflow automation, autonomous AI agents, and API protocols.',
     skills: [
       { name: 'RESTful API', logo: null, fallback: Globe2 },
       { name: 'AI Agent (n8n)', logo: null, fallback: Workflow },
@@ -98,7 +91,7 @@ export const skillCategories = [
   },
   {
     category: 'DevOps, Infrastructure & Monitoring',
-    description: 'Deployment cloud, version control, dan ketersediaan sistem.',
+    description: 'Cloud deployment, version control systems, and platform reliability.',
     skills: [
       { name: 'Git', logo: 'git' },
       { name: 'GitHub', logo: 'github' },
@@ -111,22 +104,6 @@ export const skillCategories = [
     ],
   },
 ];
-
-{skillCategories.map((group, idx) => (
-  <div key={idx} className="mb-8">
-    <h3 className="text-xl font-bold">{group.category}</h3>
-    <p className="text-sm text-gray-400 mb-4">{group.description}</p>
-    
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      {group.skills.map((skill, sIdx) => (
-        <div key={sIdx} className="p-3 border rounded-lg flex items-center gap-2">
-          {/* Render Logo / Fallback Icon di sini */}
-          <span>{skill.name}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-))}
 
 const softSkills = ['Good communication', 'Problem solving', 'Independent & collaborative', 'Quick to learn'];
 
@@ -204,7 +181,7 @@ function App() {
       <LoadingScreen visible={isLoading} />
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Abidzar home">
-           <img className="brand-avatar" src={profilePicture} alt="Profile Picture" width="40" height="40" />
+          <img className="brand-avatar" src={profilePicture} alt="Profile Picture" width="40" height="40" />
           <span className="brand-name">ABIDZAR<span>.</span></span>
         </a>
 
@@ -286,38 +263,44 @@ function App() {
           </div>
         </section>
 
+        {/* Section Skills Categorized */}
         <section id="skills" className="section skills-section">
           <div className="section-label">02 / Skills</div>
           <div className="skills-header" data-reveal>
             <div><p className="kicker">Tools & strengths</p><h2>What I bring<br /><span>to the table.</span></h2></div>
             <p className="section-description">A growing toolkit shaped by school projects, real user support, self-hosted infra, and a habit of learning by doing.</p>
           </div>
-          <div className="skills-layout">
-            <div className="skill-panel skill-panel-main" data-reveal>
-              <div className="skill-panel-title"><Code2 size={20} /><span>Technical toolkit</span><span className="panel-number">01</span></div>
-              <div className="skill-logos">
-                {technicalSkills.map((skill, index) => (
-                  <div
-                    className="skill-logo"
-                    key={skill.name}
-                    title={skill.name}
-                    data-reveal
-                    style={{ transitionDelay: `${(index % 8) * 45}ms` }}
-                  >
-                    {skill.logo ? (
-                      <img src={`https://skillicons.dev/icons?i=${skill.logo}`} alt={skill.name} loading="lazy" />
-                    ) : (
-                      skill.fallback && <skill.fallback size={22} />
-                    )}
-                    <span className="skill-logo-label">{skill.name}</span>
-                  </div>
-                ))}
+
+          <div className="skills-categories-wrap" data-reveal>
+            {skillCategories.map((group, idx) => (
+              <div key={idx} className="skill-category-block mb-10">
+                <h3 className="text-xl font-bold text-white mb-1">{group.category}</h3>
+                <p className="text-sm text-gray-400 mb-4">{group.description}</p>
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                  {group.skills.map((skill, sIdx) => {
+                    const FallbackIcon = skill.fallback;
+                    return (
+                      <div key={sIdx} className="skill-logo p-3 border border-slate-800 rounded-lg flex items-center gap-3 bg-slate-900/50">
+                        {skill.logo ? (
+                          <img src={`https://skillicons.dev/icons?i=${skill.logo}`} alt={skill.name} className="w-6 h-6 object-contain" loading="lazy" />
+                        ) : (
+                          FallbackIcon && <FallbackIcon size={20} className="text-indigo-400 shrink-0" />
+                        )}
+                        <span className="text-sm font-medium text-slate-200 truncate">{skill.name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="skills-layout mt-10">
             <div className="skill-panel skill-panel-soft" data-reveal>
               <div className="skill-panel-title"><Sparkles size={20} /><span>How I work</span><span className="panel-number">02</span></div>
               <ul>{softSkills.map((skill) => <li key={skill}><Check size={15} />{skill}</li>)}</ul>
-              <div className="language-note"><span>Languages</span><strong>Bahasa Indonesia <small>Expert</small></strong><strong>English <small>Basic</small></strong></div>
+              <div className="language-note"><span>Languages</span><strong>Indonesian <small>Native</small></strong><strong>English <small>Basic</small></strong></div>
             </div>
           </div>
         </section>
