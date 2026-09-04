@@ -6,6 +6,7 @@ import {
   Activity,
   AlertTriangle,
   ArrowUpRight,
+  Check,
   ChevronDown,
   Cloud,
   Code2,
@@ -273,21 +274,21 @@ function App() {
 
           <div className="skills-categories-wrap" data-reveal>
             {skillCategories.map((group, idx) => (
-              <div key={idx} className="skill-category-block mb-10">
-                <h3 className="text-xl font-bold text-white mb-1">{group.category}</h3>
-                <p className="text-sm text-gray-400 mb-4">{group.description}</p>
+              <div key={idx} className="skill-category-block" style={{ marginBottom: '2.5rem' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#fff', marginBottom: '0.25rem' }}>{group.category}</h3>
+                <p style={{ fontSize: '0.875rem', color: '#94a3b8', marginBottom: '1rem' }}>{group.description}</p>
                 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.75rem' }}>
                   {group.skills.map((skill, sIdx) => {
                     const FallbackIcon = skill.fallback;
                     return (
-                      <div key={sIdx} className="skill-logo p-3 border border-slate-800 rounded-lg flex items-center gap-3 bg-slate-900/50">
+                      <div key={sIdx} style={{ padding: '0.75rem', border: '1px solid #1e293b', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', backgroundColor: 'rgba(15, 23, 42, 0.5)' }}>
                         {skill.logo ? (
-                          <img src={`https://skillicons.dev/icons?i=${skill.logo}`} alt={skill.name} className="w-6 h-6 object-contain" loading="lazy" />
+                          <img src={`https://skillicons.dev/icons?i=${skill.logo}`} alt={skill.name} style={{ width: '1.5rem', height: '1.5rem', objectFit: 'contain' }} loading="lazy" />
                         ) : (
-                          FallbackIcon && <FallbackIcon size={20} className="text-indigo-400 shrink-0" />
+                          FallbackIcon && <FallbackIcon size={20} style={{ color: '#818cf8', flexShrink: 0 }} />
                         )}
-                        <span className="text-sm font-medium text-slate-200 truncate">{skill.name}</span>
+                        <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{skill.name}</span>
                       </div>
                     );
                   })}
@@ -296,7 +297,7 @@ function App() {
             ))}
           </div>
 
-          <div className="skills-layout mt-10">
+          <div className="skills-layout" style={{ marginTop: '2.5rem' }}>
             <div className="skill-panel skill-panel-soft" data-reveal>
               <div className="skill-panel-title"><Sparkles size={20} /><span>How I work</span><span className="panel-number">02</span></div>
               <ul>{softSkills.map((skill) => <li key={skill}><Check size={15} />{skill}</li>)}</ul>
