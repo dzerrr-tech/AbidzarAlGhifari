@@ -96,6 +96,7 @@ export const skillCategories = [
     skills: [
       { name: 'Git', logo: 'git' },
       { name: 'GitHub', logo: 'github' },
+      { name: 'Docker', logo: 'docker' }, // <--- Tambahkan di sini
       { name: 'Vercel', logo: 'vercel' },
       { name: 'Render', logo: null, fallback: Cloud },
       { name: 'Cloudflare', logo: 'cloudflare' },
