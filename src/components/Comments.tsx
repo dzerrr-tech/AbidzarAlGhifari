@@ -94,7 +94,7 @@ export default function Comments({ visitorName, onChangeName }: CommentsProps) {
   return (
     <section id="comments" className="section comments-section">
       <div className="section-label">06 / Guestbook</div>
-      <div className="comments-heading" data-reveal>
+      <div className="comments-heading">
         <div>
           <p className="kicker">Tinggalkan jejak</p>
           <h2>
@@ -111,7 +111,7 @@ export default function Comments({ visitorName, onChangeName }: CommentsProps) {
         </p>
       </div>
 
-      <form className="comment-form" data-reveal onSubmit={handleSubmit}>
+      <form className="comment-form" onSubmit={handleSubmit}>
         <textarea
           rows={3}
           placeholder="Tulis komentar kamu di sini..."
@@ -126,7 +126,7 @@ export default function Comments({ visitorName, onChangeName }: CommentsProps) {
         {error && <p className="form-note form-note-error">{error}</p>}
       </form>
 
-      <div className="comment-list" data-reveal>
+      <div className="comment-list">
         {comments.length === 0 ? (
           <p className="comment-empty">
             <MessageCircle size={16} /> Belum ada komentar. Jadi yang pertama!
