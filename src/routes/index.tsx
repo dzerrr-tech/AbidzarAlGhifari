@@ -5,8 +5,11 @@ import mngr from "@/assets/mngr.png";
 import kmpg from "@/assets/kmpg.png";
 import ksrlndr from "@/assets/ksrlndr.jpg";
 import LoadingScreen from "@/components/LoadingScreen";
+import NameGate from "@/components/NameGate";
+import Comments from "@/components/Comments";
 import CustomCursor from "@/components/CustomCursor";
 import { useScrollEffects } from "@/hooks/useScrollEffects";
+import { useVisitorName } from "@/hooks/useVisitorname";
 import {
   Activity,
   AlertTriangle,
@@ -204,12 +207,17 @@ const navigation = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Guestbook", href: "#comments" },
 ];
 
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { name: visitorName, ready: nameReady, setName: setVisitorName, clearName } =
+    useVisitorName();
+
+  const showNameGate = !isLoading && nameReady && !visitorName;
 
   useEffect(() => {
     const minDuration = 1500;
@@ -235,11 +243,11 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isLoading ? "hidden" : "";
+    document.body.style.overflow = isLoading || showNameGate ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isLoading]);
+  }, [isLoading, showNameGate]);
 
   useScrollEffects();
 
@@ -260,6 +268,7 @@ function Index() {
     <div className="site-shell">
       <CustomCursor />
       <LoadingScreen visible={isLoading} />
+      <NameGate visible={showNameGate} onSubmit={setVisitorName} />
       <div className="scroll-progress">
         <div className="scroll-progress-fill" />
       </div>
@@ -692,6 +701,8 @@ function Index() {
             </form>
           </div>
         </section>
+
+        {visitorName && <Comments visitorName={visitorName} onChangeName={clearName} />}
       </main>
 
       <footer className="site-footer">
